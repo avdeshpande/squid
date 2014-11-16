@@ -1,0 +1,11 @@
+#username-dropdown {
+    display: inline;
+}
+
+#or-text {
+    color: #ffffff;
+}
+
+.signup-form.dropdown-menu {
+    padding: 15px;
+}

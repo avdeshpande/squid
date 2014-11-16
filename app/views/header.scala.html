@@ -1,0 +1,75 @@
+@(someuser: Option[User])(implicit flash: Flash, lang: Lang, session: Session)
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Squid</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            @someuser match {
+            case Some(user: User) => {
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <img class="img-circle" src="@user.imageUrl.get"/><a id="username-dropdown" href="#"
+                                                                         class="dropdown-toggle" data-toggle="dropdown">@user.firstName
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            }
+            case _ => {
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign-Up<span class="caret"></span></a>
+                    <ul class="signup-form dropdown-menu" role="menu">
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="email" class="form-control input" id="signup-email" placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control input" id="signup-password" placeholder="Enter Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control input" id="signup-confirm-password" placeholder="Confirm Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn btn-block">Sign-Up</button>
+                        </form>
+                        <div id="seperator">----OR----</div>
+                        <form role="form" action="@routes.Application.fbOAuth()" method="post">
+                            <button id="facebook-signin" class="btn btn-primary btn btn-block">Sign-In with Facebook</button>
+                        </form>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right" role="form" id="login-form" action="@routes.Application.login()" method="post">
+                <div class="form-group">
+                    <input type="text" name="email" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Password" class="form-control">
+                </div>
+                <button type="submit" id="login-button" class="btn btn-primary">Sign in</button>
+            </form>
+            }
+            }
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
