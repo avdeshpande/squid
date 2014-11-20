@@ -13,7 +13,7 @@ import scala.slick.lifted.TableQuery
  */
 case class AutomobileContent(
                               automobileid: UUID,
-                              filename: String,
+                              url: String,
                               created: Long = Platform.currentTime,
                               updated: Long = Platform.currentTime,
                               id: UUID = UUID.randomUUID()
@@ -49,11 +49,11 @@ class AutomobileContents(tag: Tag) extends Table[AutomobileContent](tag, "automo
 
   def automobileid = column[UUID]("automobileid")
 
-  def filename = column[String]("filename")
+  def url = column[String]("url")
 
   def created = column[Long]("created")
 
   def updated = column[Long]("updated")
 
-  def * = (automobileid, filename, created, updated, id) <>((AutomobileContent.apply _).tupled, AutomobileContent.unapply)
+  def * = (automobileid, url, created, updated, id) <>((AutomobileContent.apply _).tupled, AutomobileContent.unapply)
 }

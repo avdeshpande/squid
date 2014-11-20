@@ -42,9 +42,9 @@ CREATE TABLE automobile_contents
 (
   id UUID PRIMARY KEY,
   automobileid UUID REFERENCES automobiles(id),
-  filename VARCHAR(255) NOT NULL,
-  created  BIGINT       NOT NULL,
-  updated  BIGINT       NOT NULL
+  url     VARCHAR(255) NOT NULL,
+  created BIGINT       NOT NULL,
+  updated BIGINT       NOT NULL
 );
 
 

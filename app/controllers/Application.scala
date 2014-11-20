@@ -3,7 +3,7 @@ package controllers
 import java.util.UUID
 
 import api.services.AutomobileService
-import models.{Automobile, User, Users}
+import models.{AutomobileContent, Automobile, User, Users}
 import play.api.Play._
 import play.api.libs.json.{JsSuccess, Json}
 import play.api.mvc._
@@ -50,16 +50,16 @@ object Application extends BaseController {
   }
 
   def index = UserAuthenticated({ implicit request =>
-//    Automobile.add(Automobile(UUID.fromString("43b6ff26-3bec-41ae-b310-824d2724e237"), "toyota camry LE 2011", "toyota camry LE 2011 description", "camry", "LE", 2011, "automatic", "gas", "clean", 10000))
-//    AutomobileContent.add(AutomobileContent(UUID.fromString("629842c4-147e-421e-a2b9-adf07a0d369a"), "content1.jpg"))
-//    AutomobileContent.add(AutomobileContent(UUID.fromString("629842c4-147e-421e-a2b9-adf07a0d369a"), "content2.jpg"))
-//    AutomobileContent.add(AutomobileContent(UUID.fromString("629842c4-147e-421e-a2b9-adf07a0d369a"), "content3.jpg"))
-//    AutomobileContent.add(AutomobileContent(UUID.fromString("629842c4-147e-421e-a2b9-adf07a0d369a"), "content4.jpg"))
-//    AutomobileContent.add(AutomobileContent(UUID.fromString("629842c4-147e-421e-a2b9-adf07a0d369a"), "content5.jpg"))
-//    AutomobileContent.add(AutomobileContent(UUID.fromString("629842c4-147e-421e-a2b9-adf07a0d369a"), "content6.jpg"))
-//    AutomobileContent.add(AutomobileContent(UUID.fromString("629842c4-147e-421e-a2b9-adf07a0d369a"), "content7.jpg"))
-//    AutomobileContent.add(AutomobileContent(UUID.fromString("629842c4-147e-421e-a2b9-adf07a0d369a"), "content8.jpg"))
-    println(Json.toJson(Automobile.listAll))
+//    Automobile.add(Automobile(UUID.fromString("92bf860b-f425-4f84-9c1d-cca6889c1bed"), "toyota camry LE 2012", "toyota camry LE 2012 description", "camry", "SE", 2012, "automatic", "gas", "clean", 5000))
+//    AutomobileContent.add(AutomobileContent(UUID.fromString("c7957f45-9e31-4fd2-9c2d-e1c283be7d1b"), "http://localhost:9000/content/automobile/content1.jpg"))
+//    AutomobileContent.add(AutomobileContent(UUID.fromString("c7957f45-9e31-4fd2-9c2d-e1c283be7d1b"), "http://localhost:9000/content/automobile/content2.jpg"))
+//    AutomobileContent.add(AutomobileContent(UUID.fromString("c7957f45-9e31-4fd2-9c2d-e1c283be7d1b"), "http://localhost:9000/content/automobile/content3.jpg"))
+//    AutomobileContent.add(AutomobileContent(UUID.fromString("c7957f45-9e31-4fd2-9c2d-e1c283be7d1b"), "http://localhost:9000/content/automobile/content4.jpg"))
+//    AutomobileContent.add(AutomobileContent(UUID.fromString("c7957f45-9e31-4fd2-9c2d-e1c283be7d1b"), "http://localhost:9000/content/automobile/content5.jpg"))
+//    AutomobileContent.add(AutomobileContent(UUID.fromString("c7957f45-9e31-4fd2-9c2d-e1c283be7d1b"), "http://localhost:9000/content/automobile/content6.jpg"))
+//    AutomobileContent.add(AutomobileContent(UUID.fromString("c7957f45-9e31-4fd2-9c2d-e1c283be7d1b"), "http://localhost:9000/content/automobile/content7.jpg"))
+//    AutomobileContent.add(AutomobileContent(UUID.fromString("c7957f45-9e31-4fd2-9c2d-e1c283be7d1b"), "http://localhost:9000/content/automobile/content8.jpg"))
+//    println(Json.toJson(Automobile.listAll))
     Ok(views.html.index("User authenticated.", Some(request.user)))
   })
 
@@ -72,7 +72,7 @@ object Application extends BaseController {
     request.session.get("accessToken").map { access_token =>
       Redirect(routes.Application.index())
     }.getOrElse {
-      Ok(views.html.signup(None, Automobile.listAll))
+      Ok(views.html.signup(None, AutomobileService.getAllAutomobiles))
     }
   }
 
@@ -129,7 +129,7 @@ object Application extends BaseController {
     }
   }
 
-  def autoImage(id: String) = Action {
+  def autoContent(id: String) = Action {
     Ok.sendFile(content = new java.io.File(automobileContentPath + id),
       inline = true
     )

@@ -1,4 +1,4 @@
-@(user: Option[User], automobiles: List[Automobile])(implicit flash: Flash, lang: Lang, session: Session)
+@(user: Option[User], automobiles: List[api.resources.AutomobileResource])(implicit flash: Flash, lang: Lang, session: Session)
 @import helper._
 @import helper.twitterBootstrap._
 @main("squid", user) {
@@ -30,6 +30,10 @@
         <li>
             <h3>@auto.title</h3>
             <p class="description">@auto.description</p>
-        </li> }
+            @if(auto.contents.nonEmpty){
+                <img src=@auto.contents(0).url>
+            }
+        </li>
+        }
     </ul>
 }

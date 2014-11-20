@@ -13,8 +13,8 @@ GET     /fbOAuthReturn                          controllers.Application.fbOAuthR
 
 POST     /fbOAuth                               controllers.Application.fbOAuth
 
-GET      /content/automobile/:id          controllers.Application.autoImage(id: String)
+GET      /content/automobile/:id                controllers.Application.autoContent(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file                   controllers.Assets.at(path="/public", file)
+GET     /assets/*file                           controllers.Assets.at(path="/public", file)
 
