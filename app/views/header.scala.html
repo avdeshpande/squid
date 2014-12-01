@@ -1,4 +1,4 @@
-@(someuser: Option[User])(implicit flash: Flash, lang: Lang, session: Session)
+@()(implicit flash: Flash, lang: Lang, session: Session)
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,14 +15,10 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            @someuser match {
-            case Some(user: User) => {
-
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <img class="img-circle" src="@user.imageUrl.get"/><a id="username-dropdown" href="#"
-                                                                         class="dropdown-toggle" data-toggle="dropdown">@user.firstName
-                    <span class="caret"></span></a>
+                <li id="squid-header-user-header-dropdown-menu" class="dropdown hidden">
+                    <img id="user-profile-image" class="img-circle" src=""/>
+                    <a id="username-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Another action</a></li>
@@ -31,11 +27,7 @@
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </li>
-            </ul>
-            }
-            case _ => {
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+                <li id="squid-header-user-signup-dropdown-menu" class="dropdown hidden">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign-Up<span class="caret"></span></a>
                     <ul class="signup-form dropdown-menu" role="menu">
                         <form role="form">
@@ -57,7 +49,7 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right" role="form" id="login-form" action="@routes.Application.login()" method="post">
+            <form id="squid-signup-form" class="navbar-form navbar-right hidden" role="form" id="login-form" action="@routes.Application.login()" method="post">
                 <div class="form-group">
                     <input type="text" name="email" placeholder="Email" class="form-control">
                 </div>
@@ -66,8 +58,7 @@
                 </div>
                 <button type="submit" id="login-button" class="btn btn-primary">Sign in</button>
             </form>
-            }
-            }
+
         </div>
         <!-- /.navbar-collapse -->
     </div>

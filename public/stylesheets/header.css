@@ -9,3 +9,15 @@
 .signup-form.dropdown-menu {
     padding: 15px;
 }
+
+#squid-header-user-header-dropdown-menu .hidden {
+    visibility: hidden;
+}
+
+#squid-header-user-signup-dropdown-menu .hidden {
+    visibility: hidden;
+}
+
+#squid-signup-form .hidden {
+    visibility: hidden;
+}

@@ -2,7 +2,7 @@ package models
 
 import java.util.UUID
 
-import play.api.libs.json._
+import play.api.libs.json.Json
 
 import scala.compat.Platform
 import scala.slick.driver.PostgresDriver.simple._
@@ -35,7 +35,6 @@ case class Automobile(
                        )
 
 object Automobile {
-  implicit val autombileFormat = Json.format[Automobile]
   val automobiles = TableQuery[Automobiles]
   lazy val database = Database.forURL("jdbc:postgresql://localhost:5432/squid", driver = "org.postgresql.Driver")
 
@@ -54,13 +53,19 @@ object Automobile {
 
   def findByUserId(userId: UUID) = {
     database.withSession { implicit session =>
-      automobiles.filter(_.userid === userId).firstOption
+      automobiles.filter(_.userid === userId).list
     }
   }
 
   def listAll = {
     database.withSession { implicit session =>
       automobiles.list
+    }
+  }
+
+  def list(offset: Int = 0, size: Int = 50) = {
+    database.withSession { implicit session =>
+      automobiles.list.drop(offset).take(size)
     }
   }
 }

@@ -2,8 +2,6 @@ package models
 
 import java.util.UUID
 
-import play.api.libs.json._
-
 import scala.compat.Platform
 import scala.slick.driver.PostgresDriver.simple._
 import scala.slick.lifted.TableQuery
@@ -24,7 +22,6 @@ case class User(
                  )
 
 object User {
-  implicit val userFormat = Json.format[User]
   val users = TableQuery[Users]
   lazy val database = Database.forURL("jdbc:postgresql://localhost:5432/squid", driver = "org.postgresql.Driver")
 

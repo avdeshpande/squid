@@ -15,9 +15,9 @@ trait BaseController extends Controller {
         f(UserAuthenticatedRequest(user, request))
       case None =>
         val newSession = request.session + ("postOAuthUri" -> request.uri)
+//        println("Redirecting to signup: " + newSession.get("userId").getOrElse("no user"))
         //        Redirect(routes.Application.signup).withSession(newSession)
-        println("Redirecting to signup")
-        Redirect(routes.Application.signup).withSession(newSession)
+        Ok(views.html.home("User un-authenticated.")).withSession(newSession)
     }
   }
 
